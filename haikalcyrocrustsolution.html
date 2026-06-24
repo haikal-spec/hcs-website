@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haikal CryoCrust Solution</title>
+    <style>
+        /* CSS Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-dark: #0A2342;
+            --accent-color: #17C3B2;
+            --light-bg: #F4F4F9;
+            --text-gray: #666;
+        }
+
+        body { background-color: var(--light-bg); color: #333; line-height: 1.6; }
+
+        /* Navigation Bar */
+        header {
+            background-color: var(--primary-dark);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo { color: var(--accent-color); font-size: 28px; font-weight: 900; letter-spacing: 2px; text-decoration: none; }
+        .logo span { color: white; font-size: 16px; font-weight: 300; margin-left: 10px; letter-spacing: 1px; }
+
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul li a { color: white; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--accent-color); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 35, 66, 0.9) 0%, rgba(23, 86, 118, 0.9) 100%), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; font-weight: 900; max-width: 800px; }
+        .hero h1 span { color: var(--accent-color); }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; max-width: 600px; }
+        
+        .btn {
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .btn:hover { background-color: white; transform: translateY(-3px); }
+
+        /* Sections General */
+        section { padding: 80px 10%; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 50px; text-transform: uppercase; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto 0; }
+
+        /* About Section */
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+        .about-text h3 { color: var(--accent-color); margin-bottom: 15px; font-size: 1.5rem; }
+        .about-text p { margin-bottom: 20px; color: var(--text-gray); }
+        .ssm-box { background: white; padding: 20px; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .ssm-image { width: 100%; border: 1px solid #ddd; border-radius: 5px; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Services Section */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: white; padding: 40px 30px; text-align: center; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; border-bottom: 4px solid transparent; }
+        .service-card:hover { transform: translateY(-10px); border-bottom-color: var(--accent-color); }
+        .service-icon { font-size: 40px; color: var(--accent-color); margin-bottom: 20px; }
+        .service-card h3 { color: var(--primary-dark); margin-bottom: 15px; }
+        .service-card p { color: var(--text-gray); font-size: 0.95rem; }
+
+        /* Footer / Contact */
+        footer { background-color: var(--primary-dark); color: white; padding: 60px 10% 20px; text-align: center; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; text-align: left; }
+        .footer-col h4 { color: var(--accent-color); margin-bottom: 20px; font-size: 1.2rem; text-transform: uppercase; }
+        .footer-col p, .footer-col ul { color: #A0B2C6; font-size: 0.95rem; list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #A0B2C6; text-decoration: none; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: var(--accent-color); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #A0B2C6; font-size: 0.8rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; }
+            nav ul { margin-top: 15px; gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 2rem; }
+            .about-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <a href="#" class="logo">HCS <span>HAIKAL CRYOCRUST</span></a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Excellence in <span>Industrial Tech</span> & <span>Printing</span></h1>
+        <p>Your trusted partner for robust Data Acquisition Systems, Signal Amplifiers, and High-Quality Commercial Printing in Malaysia.</p>
+        <a href="#services" class="btn">Discover Our Services</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Our Company</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Bridging the Gap in Tech & Documentation</h3>
+                <p>Founded on June 10, 2026, Haikal CryoCrust Solution is an active sole proprietorship registered under the Companies Commission of Malaysia (SSM). Based at the Kuantan Air Force Base, we are dedicated to providing high-precision electronic equipment and professional printing services.</p>
+                <p><strong>Our Vision:</strong> To be a versatile leader in Malaysia, providing uncompromising reliability in both precision industrial control solutions and premier commercial printing services.</p>
+            </div>
+            
+            <div class="ssm-box">
+                <strong>Official SSM Registration:</strong><br>
+                Company Name: HAIKAL CRYOCRUST SOLUTION<br>
+                Registration No: 202603157128 (003860531-X)<br>
+                Owner: Muhammad Haikal Bin Maliki<br><br>
+                
+                <img src="sijil_ssm.png" alt="Sijil Pendaftaran Perniagaan SSM Haikal CryoCrust" class="ssm-image">
+                <p style="font-size: 0.8rem; text-align: center; color: var(--text-gray); margin-top: 5px;">Sijil Perakuan Pendaftaran Perniagaan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" style="background-color: white;">
+        <h2 class="section-title">Our Core Divisions</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Data Acquisition (DAQ)</h3>
+                <p>We design and supply comprehensive DAQ systems to measure physical phenomena, providing real-time monitoring crucial for industrial process control and research.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔌</div>
+                <h3>Signal Conditioning & Amplifiers</h3>
+                <p>Premium signal conditioning hardware and isolation amplifiers to protect sensitive control equipment from voltage spikes and ensure operational safety.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🖨️</div>
+                <h3>Professional Printing Services</h3>
+                <p>High-volume document printing, technical blueprint reproduction, and specialized binding services catering to corporate, industrial, and educational institutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Section -->
+    <section id="contact" style="padding: 0;">
+        <footer>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Haikal CryoCrust Solution</h4>
+                    <p>Delivering technological excellence and professional documentation solutions across Malaysia.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Main Office</h4>
+                    <ul>
+                        <li>OMQ C02, 1/1, Pangkalan Tentera Udara Kuantan</li>
+                        <li>Jalan Gambang, 25990 Kuantan, Pahang</li>
+                        <li>Malaysia</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>📞 +60 16-960 3601</li>
+                        <li>✉️ muhammadhaikal140404@gmail.com</li>
+                        <li>🌐 <a href="https://www.haikalcryocrustsolution.com" target="_blank">https://www.haikalcryocrustsolution.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Haikal CryoCrust Solution. All Rights Reserved. | BVE2444/BVI2254 Technopreneur Capstone 1 Project.</p>
+            </div>
+        </footer>
+    </section>
+
+</body>
+</html>
